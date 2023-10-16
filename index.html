@@ -1,32 +1,44 @@
-<title>Calculator!</title>
 <!DOCTYPE html>
 <html>
 <head>
+  <title>Calculator</title>
 </head>
 <body>
   <div class="calculator">
     <input type="text" id="display" value="0">
     <div class="keys">
-      <button type="button" onclick="add(1)">1</button>
-      <button type="button" onclick="add(2)">2</button>
-      <button type="button" onclick="add(3)">3</button>
-      <button type="button" onclick="add(4)">4</button>
-      <button type="button" onclick="add(5)">5</button>
-      <button type="button" onclick="add(6)">6</button>
-      <button type="button" onclick="add(7)">7</button>
-      <button type="button" onclick="add(8)">8</button>
-      <button type="button" onclick="add(9)">9</button>
-      <button type="button" onclick="add(0)">0</button>
-      <button type="button" onclick="add('+')">+</button>
-      <button type="button" onclick="add('-')">-</button>
-      <button type="button" onclick="add('*')">*</button>
-      <button type="button" onclick="add('/')">/</button>
-      <button type="button" onclick="calculate()">=</button>
-      <button type="button" onclick="clear()">C</button>
-      <button type="button" onclick="iframeCalculator()">Calculator</button>
+      <div class="row">
+        <button type="button" onclick="add(1)">1</button>
+        <button type="button" onclick="add(2)">2</button>
+        <button type="button" onclick="add(3)">3</button>
+      </div>
+      <div class="row">
+        <button type="button" onclick="add(4)">4</button>
+        <button type="button" onclick="add(5)">5</button>
+        <button type="button" onclick="add(6)">6</button>
+      </div>
+      <div class="row">
+        <button type="button" onclick="add(7)">7</button>
+        <button type="button" onclick="add(8)">8</button>
+        <button type="button" onclick="add(9)">9</button>
+      </div>
+      <div class="row">
+        <button type="button" onclick="add(0)">0</button>
+        <button type="button" onclick="add('+')">+</button>
+        <button type="button" onclick="add('-')">-</button>
+      </div>
+      <div class="row">
+        <button type="button" onclick="add('*')">*</button>
+        <button type="button" onclick="add('/')">/</button>
+        <button type="button" onclick="calculate()">=</button>
+      </div>
+      <div class="row">
+        <button type="button" onclick="clear()">C</button>
+        <button type="button" onclick="iframeCalculator()">Calculator</button>
+      </div>
     </div>
   </div>
-  <iframe id="calculator" src="https://scratch.mit.edu/projects/105500895/"></iframe>
+  <iframe id="calculator" src="https://scratch.mit.edu/projects/105500895/" style="display: none"></iframe>
   <script>
     var display = document.getElementById("display");
     var iframe = document.getElementById("calculator");
@@ -45,19 +57,16 @@
     }
 
     function iframeCalculator() {
-      if (iframe) {
-        iframe.remove();
+      if (iframe.style.display === "none") {
+        iframe.style.display = "block";
       } else {
-        iframe = document.createElement("iframe");
-        iframe.id = "calculator";
-        iframe.src = "https://scratch.mit.edu/projects/105500895/";
-        document.body.appendChild(iframe);
+        iframe.style.display = "none";
       }
     }
 
     document.addEventListener("keydown", function(event) {
-      if (event.key === "Delete" && iframe) {
-        iframe.remove();
+      if (event.key === "Delete" && iframe.style.display === "block") {
+        iframe.style.display = "none";
       }
     });
   </script>
