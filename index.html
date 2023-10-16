@@ -1,38 +1,65 @@
 <title>Calculator!</title>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
- <head>
-  <meta charset="utf-8">
-  <link href="style.css" rel="stylesheet">
-  <script src="script.js" defer></script>
- </head>
- <body>
-  <div class="calculator-grid">
-  <iframe id="scratch-iframe" src="https://scratch.mit.edu/projects/105500895/" style="display: none; width: 100%; height: 100%;"></iframe>
-  <div class="output">
-  <div data-previous-operand class="previous-operand"></div>
-  <div data-current-operand class="current-operand"></div>
-  </div>
-  <button data-all-clear class="span-two">AC</button>
-  <button data-delete onclick="showScratchIframe()">DEL</button>
-  <button data-operation>÷</button>
-  <button data-number>1</button>
-  <button data-number>2</button>
-  <button data-number>3</button>
-  <button data-operation>*</button>
-  <button data-number>4</button>
-  <button data-number>5</button>
-  <button data-number>6</button>
-  <button data-operation>+</button>
-  <button data-number>7</button>
-  <button data-number>8</button>
-  <button data-number>9</button>
-  <button data-operation>-</button>
-  <button data-number>.</button>
-  <button data-number>0</button>
-  <button data-equals class="span-two">=</button>
+<html>
+<head>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" value="0">
+    <div class="keys">
+      <button type="button" onclick="add(1)">1</button>
+      <button type="button" onclick="add(2)">2</button>
+      <button type="button" onclick="add(3)">3</button>
+      <button type="button" onclick="add(4)">4</button>
+      <button type="button" onclick="add(5)">5</button>
+      <button type="button" onclick="add(6)">6</button>
+      <button type="button" onclick="add(7)">7</button>
+      <button type="button" onclick="add(8)">8</button>
+      <button type="button" onclick="add(9)">9</button>
+      <button type="button" onclick="add(0)">0</button>
+      <button type="button" onclick="add('+')">+</button>
+      <button type="button" onclick="add('-')">-</button>
+      <button type="button" onclick="add('*')">*</button>
+      <button type="button" onclick="add('/')">/</button>
+      <button type="button" onclick="calculate()">=</button>
+      <button type="button" onclick="clear()">C</button>
+      <button type="button" onclick="iframeCalculator()">Calculator</button>
+    </div>
+  </div>
+  <iframe id="calculator" src="https://scratch.mit.edu/projects/105500895/"></iframe>
+  <script>
+    var display = document.getElementById("display");
+    var iframe = document.getElementById("calculator");
 
-  </div>
+    function add(value) {
+      display.value += value;
+    }
 
- </body>
+    function calculate() {
+      var expression = display.value;
+      display.value = eval(expression);
+    }
+
+    function clear() {
+      display.value = "0";
+    }
+
+    function iframeCalculator() {
+      if (iframe) {
+        iframe.remove();
+      } else {
+        iframe = document.createElement("iframe");
+        iframe.id = "calculator";
+        iframe.src = "https://scratch.mit.edu/projects/105500895/";
+        document.body.appendChild(iframe);
+      }
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Delete" && iframe) {
+        iframe.remove();
+      }
+    });
+  </script>
+</body>
 </html>
