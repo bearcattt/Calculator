@@ -1,4 +1,9 @@
 function showScratchIframe() {
+  document.getElementById('scratch-iframe').style.display = 'block';
+}
+
+
+function showScratchIframe() {
   if (document.getElementById('scratch-iframe').style.display === 'none') {
     document.getElementById('scratch-iframe').style.display = 'block';
   }
