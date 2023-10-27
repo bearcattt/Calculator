@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JackCalculator™️</title>
+  <title>Calculator</title>
 </head>
 <body>
   <div class="calculator">
@@ -53,8 +53,11 @@
       display.value = eval(expression);
     }
 
+    /**
+     * Delete all numbers in the calculator bar.
+     */
     function clear() {
-      display.value = "0";
+      display.value = "";
     }
 
     function iframeCalculator() {
@@ -65,12 +68,9 @@
       }
     }
 
-    /**
-     * Hides the iframe before deleting the last character of the input display.
-     */
     function del() {
-      iframe.style.display = "none";
       display.value = display.value.slice(0, -1);
+      iframe.style.display = iframe.style.display === "none" ? "block" : "none";
     }
 
     document.addEventListener("keydown", function(event) {
