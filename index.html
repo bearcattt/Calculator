@@ -1,83 +1,144 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>JackCalculator™️</title>
-</head>
-<body>
-  <div class="calculator">
-    <input type="text" id="display" value="0">
-    <div class="keys">
-      <div class="row">
-        <button type="button" onclick="add(1)">1</button>
-        <button type="button" onclick="add(2)">2</button>
-        <button type="button" onclick="add(3)">3</button>
-      </div>
-      <div class="row">
-        <button type="button" onclick="add(4)">4</button>
-        <button type="button" onclick="add(5)">5</button>
-        <button type="button" onclick="add(6)">6</button>
-      </div>
-      <div class="row">
-        <button type="button" onclick="add(7)">7</button>
-        <button type="button" onclick="add(8)">8</button>
-        <button type="button" onclick="add(9)">9</button>
-      </div>
-      <div class="row">
-        <button type="button" onclick="add(0)">0</button>
-        <button type="button" onclick="add('+')">+</button>
-        <button type="button" onclick="add('-')">-</button>
-      </div>
-      <div class="row">
-        <button type="button" onclick="add('*')">*</button>
-        <button type="button" onclick="add('/')">/</button>
-        <button type="button" onclick="calculate()">=</button>
-      </div>
-      <div class="row">
-        <button type="button" onclick="clear()">C</button>
-        <button type="button" onclick="iframeCalculator()">Fractions</button>
-        <button type="button" onclick="del()">Del</button>
-      </div>
-    </div>
-  </div>
-  <iframe id="calculator" src="https://scratch.mit.edu/projects/105500895/embed" allowtransparency="true" width="485" height="402" frameborder="0" scrolling="no" allowfullscreen></iframe>
-  <script>
-    var display = document.getElementById("display");
-    var iframe = document.getElementById("calculator");
+<!DOCTYPE html> 
+<html> 
 
-    function add(value) {
-      display.value += value;
-    }
+<head> 
+	<title> Calculator</title> 
+	<script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.js"
+		integrity= 
+"sha512-BbVEDjbqdN3Eow8+empLMrJlxXRj5nEitiCAK5A1pUr66+jLVejo3PmjIaucRnjlB0P9R3rBUs3g5jXc8ti+fQ=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script> 
+	<script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"
+		integrity= 
+"sha512-iphNRh6dPbeuPGIrQbCdbBF/qcqadKWLa35YPVfMZMHBSI6PLJh1om2xCTWhpVpmUyb4IvVS9iYnnYMkleVXLA=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script> 
+	
+	<!-- For styling -->
+	<style> 
+		table { 
+			border: 1px solid black; 
+			margin-left: auto; 
+			margin-right: auto; 
+		} 
 
-    function calculate() {
-      var expression = display.value;
-      display.value = eval(expression);
-    }
+		input[type="button"] { 
+			width: 100%; 
+			padding: 20px 40px; 
+			background-color: green; 
+			color: white; 
+			font-size: 24px; 
+			font-weight: bold; 
+			border: none; 
+			border-radius: 5px; 
+		} 
 
-    function clear() {
-      display.value = "0";
-    }
+		input[type="text"] { 
+			padding: 20px 30px; 
+			font-size: 24px; 
+			font-weight: bold; 
+			border: none; 
+			border-radius: 5px; 
+			border: 2px solid black; 
+		} 
+	</style> 
+</head> 
+	
+<body> 
+	
+	<!-- Use Table to Create Calculator Structure Design -->
+	<table id="calcu"> 
+		<tr> 
+			<td colspan="3"><input type="text" id="result"></td> 
+			<td><input type="button" value="c" onclick="clr()" /> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="1" onclick="dis('1')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="2" onclick="dis('2')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="3" onclick="dis('3')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="/" onclick="dis('/')"
+						onkeydown="myFunction(event)"> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="4" onclick="dis('4')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="5" onclick="dis('5')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="6" onclick="dis('6')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="*" onclick="dis('*')"
+						onkeydown="myFunction(event)"> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="7" onclick="dis('7')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="8" onclick="dis('8')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="9" onclick="dis('9')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="-" onclick="dis('-')"
+						onkeydown="myFunction(event)"> </td> 
+		</tr> 
+		<tr> 
+			<td><input type="button" value="0" onclick="dis('0')"
+						onkeydown="myFunction(event)"> </td> 
+			<td><input type="button" value="." onclick="dis('.')"
+						onkeydown="myFunction(event)"> </td> 
+			
+			<!-- solve function call function solve to evaluate value -->
+			<td><input type="button" value="=" onclick="solve()"> </td> 
 
-    function iframeCalculator() {
-      if (iframe.style.display === "none") {
-        iframe.style.display = "block";
-      } else {
-        iframe.style.display = "none";
-      }
-    }
+			<td><input type="button" value="+" onclick="dis('+')"
+						onkeydown="myFunction(event)"> </td> 
+		</tr> 
+	</table> 
 
-    /**
-     * Hides the iframe before deleting the last character of the input display.
-     */
-    function del() {
-      iframe.style.display = "none";
-      display.value = display.value.slice(0, -1);
-    }
+	<script> 
+		
+		// Function that display value 
+		function dis(val) { 
+			document.getElementById("result").value += val 
+		} 
 
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Delete" && iframe.style.display === "block") {
-        iframe.style.display = "none";
-      }
-    });
-  </script>
-</body>
-</html>
+		function myFunction(event) { 
+			if (event.key == '0' || event.key == '1' 
+				|| event.key == '2' || event.key == '3' 
+				|| event.key == '4' || event.key == '5' 
+				|| event.key == '6' || event.key == '7' 
+				|| event.key == '8' || event.key == '9' 
+				|| event.key == '+' || event.key == '-' 
+				|| event.key == '*' || event.key == '/') 
+				document.getElementById("result").value += event.key; 
+		} 
+
+		var cal = document.getElementById("calcu"); 
+    
+		cal.onkeyup = function (event) { 
+			if (event.keyCode === 13) { 
+				console.log("Enter"); 
+				let x = document.getElementById("result").value 
+				console.log(x); 
+				solve(); 
+			} 
+		} 
+
+		// Function that evaluates the digit and return result 
+		function solve() { 
+			let x = document.getElementById("result").value 
+			let y = math.evaluate(x) 
+			document.getElementById("result").value = y 
+		} 
+
+		// Function that clear the display 
+		function clr() { 
+			document.getElementById("result").value = "" 
+		} 
+	</script> 
+</body> 
+
+</html> 
